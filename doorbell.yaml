@@ -33,18 +33,8 @@ switch:
     name: Chime
     pin: GPIO2
 
-event:
-  - platform: template
-    name: Event
-    id: doorbell_event
-    device_class: doorbell
-    event_types:
-      - "pressed"
-      - "double_pressed"
-
 binary_sensor:
   - platform: gpio
-    internal: True
     id: doorbell_button
     name: Button
     pin: GPIO15
@@ -57,13 +47,3 @@ binary_sensor:
     on_release:
       then:
         - switch.turn_off: relay
-    on_click:
-      then:
-        - event.trigger:
-            id: doorbell_event
-            event_type: pressed
-    on_double_click:
-      then:
-        - event.trigger:
-            id: doorbell_event
-            event_type: double_pressed
